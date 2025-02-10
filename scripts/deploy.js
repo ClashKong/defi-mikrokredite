@@ -20,7 +20,9 @@ async function main() {
     // Beispiel-Kreditanfrage direkt nach Deployment
     const tx = await mikrokredit.anfrageKredit(1000, 5, 30);
     await tx.wait();
-
+    const kreditAnzahl = await mikrokredit.getKreditAnzahl();
+    console.log(`📊 Aktuelle Anzahl an Kreditanfragen: ${kreditAnzahl}`);
+    
     console.log("📌 Erste Kreditanfrage erfolgreich gestellt!");
 }
 

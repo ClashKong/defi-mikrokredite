@@ -46,6 +46,9 @@ contract Mikrokredit {
     function getKreditAnfragen() public view returns (Kredit[] memory) {
     return kredite;
 }
+    function getKreditAnzahl() public view returns (uint256) {
+    return kredite.length;
+}
 
 }
 
