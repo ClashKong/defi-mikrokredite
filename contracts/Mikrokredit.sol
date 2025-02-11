@@ -49,6 +49,12 @@ contract Mikrokredit {
     function getKreditAnzahl() public view returns (uint256) {
     return kredite.length;
 }
+    function getKreditDetails(uint256 _kreditId) public view returns (address, uint256, uint256, uint256, bool) {
+    require(_kreditId < kredite.length, "Kredit existiert nicht");
+    
+    Kredit memory kredit = kredite[_kreditId];
+    return (kredit.borrower, kredit.amount, kredit.interest, kredit.duration, kredit.repaid);
+}
 
 }
 
