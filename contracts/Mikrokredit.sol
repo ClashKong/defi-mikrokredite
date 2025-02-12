@@ -15,7 +15,7 @@ contract Mikrokredit {
     Kredit[] public kredite;
 
     event KreditAnfrage(address indexed borrower, uint256 amount, uint256 interest, uint256 duration);
-    event KreditZurueckgezahlt(address indexed borrower, uint256 amount);
+    event KreditZurueckgezahlt(address indexed borrower, uint256 amount, uint256 kreditId);
 
     constructor() {
         owner = msg.sender;
@@ -37,7 +37,7 @@ contract Mikrokredit {
         kredit.repaid = true;
         payable(owner).transfer(msg.value);
         
-        emit KreditZurueckgezahlt(msg.sender, msg.value);
+        emit KreditZurueckgezahlt(msg.sender, msg.value, _kreditId);
     }
 
     function getKredite() public view returns (Kredit[] memory) {
