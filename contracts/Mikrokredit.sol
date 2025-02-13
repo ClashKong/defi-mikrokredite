@@ -14,7 +14,7 @@ contract Mikrokredit {
 
     Kredit[] public kredite;
 
-    event KreditAnfrage(address indexed borrower, uint256 amount, uint256 interest, uint256 duration, uint256 kreditId);
+    event KreditAnfrage(address indexed borrower, uint256 amount, uint256 interest, uint256 duration, uint256 kreditId, uint256 timestamp);
     event KreditZurueckgezahlt(address indexed borrower, uint256 amount, uint256 kreditId);
 
     constructor() {
@@ -24,7 +24,7 @@ contract Mikrokredit {
     function anfrageKredit(uint256 _amount, uint256 _interest, uint256 _duration) public {
         kredite.push(Kredit(msg.sender, _amount, _interest, _duration, false));
         uint256 kreditId = kredite.length - 1;  // ID des Kredits berechnen
-        emit KreditAnfrage(msg.sender, _amount, _interest, _duration, kreditId);
+        emit KreditAnfrage(msg.sender, _amount, _interest, _duration, kreditId, block.timestamp);
 
     }
 
