@@ -57,6 +57,10 @@ contract Mikrokredit {
     Kredit memory kredit = kredite[_kreditId];
     return (kredit.borrower, kredit.amount, kredit.interest, kredit.duration, kredit.repaid);
 }
+    function istKreditZurueckgezahlt(uint256 _kreditId) public view returns (bool) {
+    require(_kreditId < kredite.length, "Kredit existiert nicht");
+    return kredite[_kreditId].repaid;
+}
 
 }
 
