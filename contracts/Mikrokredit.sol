@@ -61,6 +61,12 @@ contract Mikrokredit {
     require(_kreditId < kredite.length, "Kredit existiert nicht");
     return kredite[_kreditId].repaid;
 }
+    function getLetzteKreditanfrage() public view returns (address, uint256, uint256, uint256, bool) {
+    require(kredite.length > 0, "Keine Kreditanfragen vorhanden");
+    
+    Kredit memory letzterKredit = kredite[kredite.length - 1];
+    return (letzterKredit.borrower, letzterKredit.amount, letzterKredit.interest, letzterKredit.duration, letzterKredit.repaid);
+}
 
 }
 
