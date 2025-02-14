@@ -3,6 +3,7 @@ pragma solidity ^0.8.19;
 
 contract Mikrokredit {
     address public owner;
+    uint256 public constant MAX_KREDIT_BETRAG = 10000 ether;
 
     struct Kredit {
         address borrower;
@@ -22,6 +23,7 @@ contract Mikrokredit {
     }
 
     function anfrageKredit(uint256 _amount, uint256 _interest, uint256 _duration) public {
+        require(_amount <= MAX_KREDIT_BETRAG, "Betrag uebersteigt das maximale Kreditlimit");
         kredite.push(Kredit(msg.sender, _amount, _interest, _duration, false));
         uint256 kreditId = kredite.length - 1;  // ID des Kredits berechnen
         emit KreditAnfrage(msg.sender, _amount, _interest, _duration, kreditId, block.timestamp);
