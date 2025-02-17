@@ -13,7 +13,12 @@ async function main() {
     await tx.wait();
 
     const kreditAnzahl = await mikrokredit.getKreditAnzahl();
+    const kreditDetails = await mikrokredit.getKreditDetails(0);
+    const kreditBetragInEth = hre.ethers.formatEther(kreditDetails[1]);
+
     console.log(`📊 Aktuelle Anzahl an Kreditanfragen: ${kreditAnzahl}`);
+    console.log(`💰 Kreditbetrag der ersten Anfrage: ${kreditBetragInEth} ETH`);
+
 
     console.log("📌 Erste Kreditanfrage erfolgreich gestellt!");
 
