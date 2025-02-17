@@ -26,6 +26,13 @@ async function main() {
     const rueckzahlung = await mikrokredit.zurueckzahlen(0, { value: hre.ethers.parseEther("1.05") });
     await rueckzahlung.wait();
     console.log("✅ Kredit erfolgreich zurückgezahlt!");
+
+    const kreditZurueckgezahlt = kreditDetails[4] ? "✅ Bezahlt" : "⏳ Ausstehend";
+
+    console.log(`📊 Aktuelle Anzahl an Kreditanfragen: ${kreditAnzahl}`);
+    console.log(`💰 Kreditbetrag der ersten Anfrage: ${kreditBetragInEth} ETH`);
+    console.log(`📌 Kreditstatus: ${kreditZurueckgezahlt}`);
+
 }
 
 main()
