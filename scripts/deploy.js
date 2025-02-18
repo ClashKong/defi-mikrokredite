@@ -9,7 +9,8 @@ async function main() {
     console.log(`✅ Mikrokredit deployed to: ${mikrokredit.address}`);
 
     // Beispiel-Kreditanfrage direkt nach Deployment
-    const tx = await mikrokredit.anfrageKredit(1000, 5, 30);
+    const kreditBetrag = hre.ethers.parseEther("1"); // 1 ETH
+    const tx = await mikrokredit.anfrageKredit(kreditBetrag, 5, 30);
     await tx.wait();
 
     const kreditAnzahl = await mikrokredit.getKreditAnzahl();
