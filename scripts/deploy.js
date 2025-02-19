@@ -32,7 +32,11 @@ async function main() {
 
     console.log(`📊 Aktuelle Anzahl an Kreditanfragen: ${kreditAnzahl}`);
     console.log(`💰 Kreditbetrag der ersten Anfrage: ${kreditBetragInEth} ETH`);
+    const kreditnehmerAdresse = kreditDetails[0];
+
+    console.log(`📌 Kreditnehmer: ${kreditnehmerAdresse}`);
     console.log(`📌 Kreditstatus: ${kreditZurueckgezahlt}`);
+
 
 }
 
