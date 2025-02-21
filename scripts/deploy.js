@@ -27,6 +27,13 @@ async function main() {
     const rueckzahlung = await mikrokredit.zurueckzahlen(0, { value: hre.ethers.parseEther("1.05") });
     await rueckzahlung.wait();
     console.log("✅ Kredit erfolgreich zurückgezahlt!");
+    const fs = require("fs");
+
+// Speichert die Adresse in einer Datei für das Frontend
+    fs.writeFileSync("contract-address.txt", mikrokredit.address);
+
+    console.log("💾 Smart Contract-Adresse wurde in 'contract-address.txt' gespeichert!");
+ 
 
     const kreditZurueckgezahlt = kreditDetails[4] ? "✅ Bezahlt" : "⏳ Ausstehend";
 
