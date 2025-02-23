@@ -7,6 +7,10 @@ async function main() {
     await mikrokredit.deployed();
 
     console.log(`✅ Mikrokredit deployed to: ${mikrokredit.address}`);
+    const networkName = hre.network.name;
+
+    console.log(`🌐 Deployment auf Netzwerk: ${networkName}`);
+
 
     // Beispiel-Kreditanfrage direkt nach Deployment
     const kreditBetrag = hre.ethers.parseEther("1"); // 1 ETH
