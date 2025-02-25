@@ -7,6 +7,11 @@ async function main() {
     await mikrokredit.deployed();
 
     console.log(`✅ Mikrokredit deployed to: ${mikrokredit.address}`);
+
+    await new Promise(resolve => setTimeout(resolve, 5000)); // 5 Sekunden warten
+
+    console.log("⏳ Wartezeit nach Deployment abgeschlossen. Es geht weiter...");
+
     const networkName = hre.network.name;
 
     console.log(`🌐 Deployment auf Netzwerk: ${networkName}`);
