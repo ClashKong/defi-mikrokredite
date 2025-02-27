@@ -13,7 +13,15 @@ async function main() {
     console.log("⏳ Wartezeit nach Deployment abgeschlossen. Es geht weiter...");
     const blockNumber = await hre.ethers.provider.getBlockNumber();
     console.log(`📦 Aktuelle Blocknummer: ${blockNumber}`);
-    
+    const txReceipt = await mikrokredit.deploymentTransaction().wait();
+    const gasUsed = txReceipt.gasUsed;
+    const gasPrice = txReceipt.effectiveGasPrice;
+    const gasCost = hre.ethers.formatEther(gasUsed * gasPrice);
+
+    console.log(`⛽ Gasverbrauch beim Deployment: ${gasUsed} Einheiten`);
+    console.log(`💰 Gaspreis: ${hre.ethers.formatUnits(gasPrice, "gwei")} Gwei`);
+    console.log(`💸 Gesamt-Kosten des Deployments: ${gasCost} ETH`);
+
     const networkName = hre.network.name;
 
     console.log(`🌐 Deployment auf Netzwerk: ${networkName}`);
