@@ -11,7 +11,9 @@ async function main() {
     await new Promise(resolve => setTimeout(resolve, 5000)); // 5 Sekunden warten
 
     console.log("⏳ Wartezeit nach Deployment abgeschlossen. Es geht weiter...");
-
+    const blockNumber = await hre.ethers.provider.getBlockNumber();
+    console.log(`📦 Aktuelle Blocknummer: ${blockNumber}`);
+    
     const networkName = hre.network.name;
 
     console.log(`🌐 Deployment auf Netzwerk: ${networkName}`);
