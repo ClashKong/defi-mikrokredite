@@ -1,6 +1,9 @@
 const hre = require("hardhat");
 
 async function main() {
+    const estimatedGas = await hre.ethers.provider.estimateGas(Mikrokredit.getDeployTransaction());
+    console.log(`📊 Geschätzter Gasverbrauch für das Deployment: ${estimatedGas}`);
+
     const Mikrokredit = await hre.ethers.getContractFactory("Mikrokredit");
     const mikrokredit = await Mikrokredit.deploy();
 
