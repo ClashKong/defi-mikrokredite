@@ -21,7 +21,10 @@ async function main() {
     console.log(`⛽ Gasverbrauch beim Deployment: ${gasUsed} Einheiten`);
     console.log(`💰 Gaspreis: ${hre.ethers.formatUnits(gasPrice, "gwei")} Gwei`);
     console.log(`💸 Gesamt-Kosten des Deployments: ${gasCost} ETH`);
-
+    const deployer = (await hre.ethers.getSigners())[0];
+    const deployerBalance = await hre.ethers.provider.getBalance(deployer.address);
+    console.log(`💳 ETH-Balance des Deployers nach Deployment: ${hre.ethers.formatEther(deployerBalance)} ETH`);
+    
     const networkName = hre.network.name;
 
     console.log(`🌐 Deployment auf Netzwerk: ${networkName}`);
