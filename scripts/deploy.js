@@ -19,6 +19,8 @@ async function main() {
     console.log("⏳ Wartezeit nach Deployment abgeschlossen. Es geht weiter...");
     const blockNumber = await hre.ethers.provider.getBlockNumber();
     console.log(`📦 Aktuelle Blocknummer: ${blockNumber}`);
+    const network = await hre.ethers.provider.getNetwork();
+    console.log(`🌍 Chain-ID des Netzwerks: ${network.chainId}`);
     const txReceipt = await mikrokredit.deploymentTransaction().wait();
     const gasUsed = txReceipt.gasUsed;
     const gasPrice = txReceipt.effectiveGasPrice;
