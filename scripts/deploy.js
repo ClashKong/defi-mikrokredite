@@ -23,9 +23,10 @@ async function main() {
     console.log(`🌍 Chain-ID des Netzwerks: ${network.chainId}`);
     const contractBalance = await hre.ethers.provider.getBalance(mikrokredit.address);
     console.log(`🏦 Aktuelle ETH-Balance des Vertrags: ${hre.ethers.formatEther(contractBalance)} ETH`);
+    const gasPrice = await hre.ethers.provider.getGasPrice();
+    console.log(`⛽ Durchschnittliche Gasgebühr im Netzwerk: ${hre.ethers.formatUnits(gasPrice, "gwei")} Gwei`)
     const txReceipt = await mikrokredit.deploymentTransaction().wait();
     const gasUsed = txReceipt.gasUsed;
-    const gasPrice = txReceipt.effectiveGasPrice;
     const gasCost = hre.ethers.formatEther(gasUsed * gasPrice);
 
     console.log(`⛽ Gasverbrauch beim Deployment: ${gasUsed} Einheiten`);
