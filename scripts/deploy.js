@@ -21,6 +21,8 @@ async function main() {
     console.log(`📦 Aktuelle Blocknummer: ${blockNumber}`);
     const network = await hre.ethers.provider.getNetwork();
     console.log(`🌍 Chain-ID des Netzwerks: ${network.chainId}`);
+    const contractBalance = await hre.ethers.provider.getBalance(mikrokredit.address);
+    console.log(`🏦 Aktuelle ETH-Balance des Vertrags: ${hre.ethers.formatEther(contractBalance)} ETH`);
     const txReceipt = await mikrokredit.deploymentTransaction().wait();
     const gasUsed = txReceipt.gasUsed;
     const gasPrice = txReceipt.effectiveGasPrice;
