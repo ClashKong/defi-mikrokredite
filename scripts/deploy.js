@@ -32,6 +32,9 @@ async function main() {
     console.log(`⛽ Gasverbrauch beim Deployment: ${gasUsed} Einheiten`);
     console.log(`💰 Gaspreis: ${hre.ethers.formatUnits(gasPrice, "gwei")} Gwei`);
     console.log(`💸 Gesamt-Kosten des Deployments: ${gasCost} ETH`);
+    const deploymentTime = new Date().toISOString();
+    console.log(`⏳ Deployment-Zeit (UTC): ${deploymentTime}`);
+
     const fs = require("fs");
 
     // Deployment-Daten speichern
