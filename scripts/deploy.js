@@ -32,6 +32,22 @@ async function main() {
     console.log(`⛽ Gasverbrauch beim Deployment: ${gasUsed} Einheiten`);
     console.log(`💰 Gaspreis: ${hre.ethers.formatUnits(gasPrice, "gwei")} Gwei`);
     console.log(`💸 Gesamt-Kosten des Deployments: ${gasCost} ETH`);
+    const fs = require("fs");
+
+    // Deployment-Daten speichern
+    const deploymentData = {
+       contractAddress: mikrokredit.address,
+       chainId: network.chainId,
+       blockNumber: blockNumber,
+       gasUsed: gasUsed.toString(),
+       gasCost: gasCost
+     };
+
+    // Speichert die Deployment-Daten in einer JSON-Datei
+    fs.writeFileSync("deployment-info.json", JSON.stringify(deploymentData, null, 2));
+
+    console.log("💾 Deployment-Informationen wurden in 'deployment-info.json' gespeichert!");
+
     console.log(`👤 Vertrag wird von folgender Adresse deployed: ${deployer.address}`);
     const deployerBalance = await hre.ethers.provider.getBalance(deployer.address);
     console.log(`💳 ETH-Balance des Deployers nach Deployment: ${hre.ethers.formatEther(deployerBalance)} ETH`);
