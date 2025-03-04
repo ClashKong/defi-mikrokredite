@@ -95,6 +95,10 @@ async function main() {
 
     console.log(`📌 Kreditnehmer: ${kreditnehmerAdresse}`);
     console.log(`📌 Kreditstatus: ${kreditZurueckgezahlt}`);
+    const endTime = Date.now();
+    const deploymentDuration = ((endTime - startTime) / 1000).toFixed(2);
+    console.log(`⏱️ Deployment-Dauer: ${deploymentDuration} Sekunden`);
+
 
 
 }
