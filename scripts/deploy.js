@@ -12,6 +12,10 @@ async function main() {
 
     await mikrokredit.deployed();
 
+    fs.writeFileSync("latest-contract.txt", mikrokredit.address);
+    console.log("💾 Letzte Smart Contract-Adresse wurde in 'latest-contract.txt' gespeichert!");
+
+
     console.log(`✅ Mikrokredit deployed to: ${mikrokredit.address}`);
 
     await new Promise(resolve => setTimeout(resolve, 5000)); // 5 Sekunden warten
@@ -98,7 +102,22 @@ async function main() {
     const endTime = Date.now();
     const deploymentDuration = ((endTime - startTime) / 1000).toFixed(2);
     console.log(`⏱️ Deployment-Dauer: ${deploymentDuration} Sekunden`);
+    const fs = require("fs");
 
+    // Überprüfen, ob die Datei existiert, und vorherige Deployments zählen
+    let deploymentCount = 0;
+    const deploymentCountFile = "deployment-count.txt";
+    
+    if (fs.existsSync(deploymentCountFile)) {
+        const count = fs.readFileSync(deploymentCountFile, "utf8");
+        deploymentCount = parseInt(count) || 0;
+    }
+    
+    deploymentCount++; // Erhöhe den Zähler für das neue Deployment
+    fs.writeFileSync(deploymentCountFile, deploymentCount.toString());
+    
+    console.log(`🔄 Anzahl der bisherigen Deployments: ${deploymentCount}`);
+    
 
 
 }
