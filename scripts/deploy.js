@@ -66,8 +66,14 @@ async function main() {
 
     // Beispiel-Kreditanfrage direkt nach Deployment
     const kreditBetrag = hre.ethers.parseEther("1"); // 1 ETH
+    const kreditStartTime = Date.now();
     const tx = await mikrokredit.anfrageKredit(kreditBetrag, 5, 30);
     await tx.wait();
+    const kreditEndTime = Date.now();
+    
+    const kreditDauer = ((kreditEndTime - kreditStartTime) / 1000).toFixed(2);
+    console.log(`⏳ Kreditanfrage verarbeitet in: ${kreditDauer} Sekunden`);
+    
 
     const kreditAnzahl = await mikrokredit.getKreditAnzahl();
     const kreditDetails = await mikrokredit.getKreditDetails(0);
