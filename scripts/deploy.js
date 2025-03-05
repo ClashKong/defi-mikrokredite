@@ -73,6 +73,13 @@ async function main() {
     
     const kreditDauer = ((kreditEndTime - kreditStartTime) / 1000).toFixed(2);
     console.log(`⏳ Kreditanfrage verarbeitet in: ${kreditDauer} Sekunden`);
+
+    // Letzte Kreditanfrage-ID speichern
+    const latestLoanId = kreditAnzahl - 1; // IDs beginnen bei 0
+    fs.writeFileSync("latest-loan-id.txt", latestLoanId.toString());
+
+    console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
+
     
 
     const kreditAnzahl = await mikrokredit.getKreditAnzahl();
