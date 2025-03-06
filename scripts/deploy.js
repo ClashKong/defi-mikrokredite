@@ -83,8 +83,10 @@ async function main() {
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
     // Speichert die letzte Kreditnehmer-Adresse
     fs.writeFileSync("latest-borrower.txt", user.address);
-
     console.log(`💾 Letzte Kreditnehmer-Adresse gespeichert: ${user.address}`);
+    // ETH-Balance des Kreditnehmers abrufen
+    const borrowerBalance = await hre.ethers.provider.getBalance(user.address);
+    console.log(`💰 ETH-Balance des Kreditnehmers nach Kreditanfrage: ${hre.ethers.formatEther(borrowerBalance)} ETH`);
 
     
 
