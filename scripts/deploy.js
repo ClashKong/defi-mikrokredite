@@ -81,6 +81,10 @@ async function main() {
     fs.writeFileSync("latest-loan-id.txt", latestLoanId.toString());
 
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
+    // Speichert die letzte Kreditnehmer-Adresse
+    fs.writeFileSync("latest-borrower.txt", user.address);
+
+    console.log(`💾 Letzte Kreditnehmer-Adresse gespeichert: ${user.address}`);
 
     
 
