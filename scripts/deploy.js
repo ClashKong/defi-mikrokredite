@@ -65,7 +65,6 @@ async function main() {
     const [user] = await hre.ethers.getSigners();
     console.log(`👤 Kreditanfrage wird gestellt von: ${user.address}`);
     
-
     // Beispiel-Kreditanfrage direkt nach Deployment
     const kreditBetrag = hre.ethers.parseEther("1"); // 1 ETH
     const kreditStartTime = Date.now();
@@ -75,10 +74,15 @@ async function main() {
     
     const kreditDauer = ((kreditEndTime - kreditStartTime) / 1000).toFixed(2);
     console.log(`⏳ Kreditanfrage verarbeitet in: ${kreditDauer} Sekunden`);
-
+    
     // Letzte Kreditanfrage-ID speichern
     const latestLoanId = kreditAnzahl - 1; // IDs beginnen bei 0
     fs.writeFileSync("latest-loan-id.txt", latestLoanId.toString());
+    // Kreditbetrag speichern
+    fs.appendFileSync("loan-amounts.txt", `${kreditBetragInEth} ETH\n`);
+    
+    console.log(`💾 Kreditbetrag gespeichert: ${kreditBetragInEth} ETH`);
+    
 
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
     // Speichert die letzte Kreditnehmer-Adresse
