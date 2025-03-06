@@ -62,7 +62,9 @@ async function main() {
     const networkName = hre.network.name;
 
     console.log(`🌐 Deployment auf Netzwerk: ${networkName}`);
-
+    const [user] = await hre.ethers.getSigners();
+    console.log(`👤 Kreditanfrage wird gestellt von: ${user.address}`);
+    
 
     // Beispiel-Kreditanfrage direkt nach Deployment
     const kreditBetrag = hre.ethers.parseEther("1"); // 1 ETH
