@@ -82,7 +82,15 @@ async function main() {
     fs.appendFileSync("loan-amounts.txt", `${kreditBetragInEth} ETH\n`);
     
     console.log(`💾 Kreditbetrag gespeichert: ${kreditBetragInEth} ETH`);
-    
+    // Gesamtsumme aller Kredite berechnen
+    const loanAmounts = fs.readFileSync("loan-amounts.txt", "utf8")
+    .split("\n")
+    .filter(line => line.trim() !== "")
+    .map(line => parseFloat(line.split(" ")[0])); // ETH-Betrag extrahieren
+
+    const totalLoanAmount = loanAmounts.reduce((acc, val) => acc + val, 0).toFixed(4);
+    console.log(`📊 Gesamtsumme aller Kredite: ${totalLoanAmount} ETH`);
+
 
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
     // Speichert die letzte Kreditnehmer-Adresse
