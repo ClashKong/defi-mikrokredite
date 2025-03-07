@@ -95,6 +95,13 @@ async function main() {
     : 0;
 
     console.log(`📊 Durchschnittlicher Kreditbetrag: ${averageLoanAmount} ETH`);
+    // Maximale und minimale Kreditanfrage berechnen
+    const maxLoanAmount = loanAmounts.length > 0 ? Math.max(...loanAmounts).toFixed(4) : 0;
+    const minLoanAmount = loanAmounts.length > 0 ? Math.min(...loanAmounts).toFixed(4) : 0;
+
+    console.log(`📊 Höchste Kreditanfrage: ${maxLoanAmount} ETH`);
+    console.log(`📉 Niedrigste Kreditanfrage: ${minLoanAmount} ETH`);
+
 
 
 
