@@ -87,9 +87,15 @@ async function main() {
     .split("\n")
     .filter(line => line.trim() !== "")
     .map(line => parseFloat(line.split(" ")[0])); // ETH-Betrag extrahieren
-
     const totalLoanAmount = loanAmounts.reduce((acc, val) => acc + val, 0).toFixed(4);
     console.log(`📊 Gesamtsumme aller Kredite: ${totalLoanAmount} ETH`);
+    // Durchschnittlichen Kreditbetrag berechnen
+    const averageLoanAmount = loanAmounts.length > 0 
+    ? (totalLoanAmount / loanAmounts.length).toFixed(4) 
+    : 0;
+
+    console.log(`📊 Durchschnittlicher Kreditbetrag: ${averageLoanAmount} ETH`);
+
 
 
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
