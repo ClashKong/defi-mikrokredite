@@ -102,7 +102,22 @@ async function main() {
     console.log(`📊 Höchste Kreditanfrage: ${maxLoanAmount} ETH`);
     console.log(`📉 Niedrigste Kreditanfrage: ${minLoanAmount} ETH`);
 
-
+    const borrowerStatsFile = "borrower-stats.json";
+    let borrowerStats = {};
+    
+    // Prüfen, ob die Datei existiert, und bisherige Werte laden
+    if (fs.existsSync(borrowerStatsFile)) {
+        borrowerStats = JSON.parse(fs.readFileSync(borrowerStatsFile, "utf8"));
+    }
+    
+    // Kreditanzahl für den aktuellen Kreditnehmer erhöhen
+    borrowerStats[user.address] = (borrowerStats[user.address] || 0) + 1;
+    
+    // Speichert die aktualisierten Werte in der Datei
+    fs.writeFileSync(borrowerStatsFile, JSON.stringify(borrowerStats, null, 2));
+    
+    console.log(`📊 ${user.address} hat nun insgesamt ${borrowerStats[user.address]} Kredite beantragt.`);
+    
 
 
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
