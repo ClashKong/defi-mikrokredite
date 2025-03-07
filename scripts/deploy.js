@@ -117,6 +117,11 @@ async function main() {
     fs.writeFileSync(borrowerStatsFile, JSON.stringify(borrowerStats, null, 2));
     
     console.log(`📊 ${user.address} hat nun insgesamt ${borrowerStats[user.address]} Kredite beantragt.`);
+    // Anzahl der einzigartigen Kreditnehmer berechnen
+    const uniqueBorrowers = Object.keys(borrowerStats).length;
+
+    console.log(`📊 Anzahl der einzigartigen Kreditnehmer: ${uniqueBorrowers}`);
+
     
 
 
