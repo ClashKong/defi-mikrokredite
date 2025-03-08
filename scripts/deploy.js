@@ -128,11 +128,14 @@ async function main() {
 
     // Ersten Kreditnehmer ermitteln (erste Adresse in borrowerStats)
     const firstBorrower = Object.keys(borrowerStats).length > 0 ? Object.keys(borrowerStats)[0] : "Keine Anfragen bisher";
+    // Letzten Kreditnehmer ermitteln (letzte Adresse in borrowerStats)
+    const borrowerAddresses = Object.keys(borrowerStats);
+    const lastBorrower = borrowerAddresses.length > 0 ? borrowerAddresses[borrowerAddresses.length - 1] : "Keine Anfragen bisher";
+
+    console.log(`🔚 Letzter Kreditnehmer: ${lastBorrower}`);
+
 
     console.log(`🎖️ Erster Kreditnehmer: ${firstBorrower}`);
-
-    
-
 
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
     // Speichert die letzte Kreditnehmer-Adresse
