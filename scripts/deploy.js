@@ -121,6 +121,10 @@ async function main() {
     const uniqueBorrowers = Object.keys(borrowerStats).length;
 
     console.log(`📊 Anzahl der einzigartigen Kreditnehmer: ${uniqueBorrowers}`);
+    // Meistgenutzte Kreditnehmer-Adresse finden
+    let mostActiveBorrower = Object.keys(borrowerStats).reduce((a, b) => borrowerStats[a] > borrowerStats[b] ? a : b, "");
+
+    console.log(`🏆 Aktivster Kreditnehmer: ${mostActiveBorrower} mit ${borrowerStats[mostActiveBorrower]} Krediten`);
 
     
 
