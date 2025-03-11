@@ -173,7 +173,11 @@ async function main() {
     s.writeFileSync("total-loan-amount.txt", totalLoanAmount.toString());
 
     console.log(`💾 Gesamtsumme aller Kredite gespeichert: ${totalLoanAmount} ETH`);
- 
+    // Speichert den durchschnittlichen Kreditbetrag in einer Datei
+    fs.writeFileSync("average-loan-amount.txt", averageLoanAmount.toString());
+
+    console.log(`💾 Durchschnittlicher Kreditbetrag gespeichert: ${averageLoanAmount} ETH`);
+
     // 💰 Rückzahlungstest hinzufügen
     const rueckzahlung = await mikrokredit.zurueckzahlen(0, { value: hre.ethers.parseEther("1.05") });
     await rueckzahlung.wait();
