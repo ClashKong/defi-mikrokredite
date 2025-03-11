@@ -130,6 +130,10 @@ async function main() {
     let mostActiveBorrower = Object.keys(borrowerStats).reduce((a, b) => borrowerStats[a] > borrowerStats[b] ? a : b, "");
 
     console.log(`🏆 Aktivster Kreditnehmer: ${mostActiveBorrower} mit ${borrowerStats[mostActiveBorrower]} Krediten`);
+    // Speichert die aktivste Kreditnehmer-Adresse in einer Datei
+    fs.writeFileSync("most-active-borrower.txt", mostActiveBorrower);
+
+    console.log(`💾 Aktivster Kreditnehmer gespeichert: ${mostActiveBorrower}`);
 
     // Ersten Kreditnehmer ermitteln (erste Adresse in borrowerStats)
     const firstBorrower = Object.keys(borrowerStats).length > 0 ? Object.keys(borrowerStats)[0] : "Keine Anfragen bisher";
