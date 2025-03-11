@@ -169,7 +169,11 @@ async function main() {
 
 
     console.log("📌 Erste Kreditanfrage erfolgreich gestellt!");
+    // Speichert die gesamte Kreditsumme in einer Datei
+    s.writeFileSync("total-loan-amount.txt", totalLoanAmount.toString());
 
+    console.log(`💾 Gesamtsumme aller Kredite gespeichert: ${totalLoanAmount} ETH`);
+ 
     // 💰 Rückzahlungstest hinzufügen
     const rueckzahlung = await mikrokredit.zurueckzahlen(0, { value: hre.ethers.parseEther("1.05") });
     await rueckzahlung.wait();
