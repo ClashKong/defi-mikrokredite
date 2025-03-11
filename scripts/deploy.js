@@ -89,6 +89,11 @@ async function main() {
     .map(line => parseFloat(line.split(" ")[0])); // ETH-Betrag extrahieren
     const totalLoanAmount = loanAmounts.reduce((acc, val) => acc + val, 0).toFixed(4);
     console.log(`📊 Gesamtsumme aller Kredite: ${totalLoanAmount} ETH`);
+    // Gesamtanzahl aller Kreditanfragen in Datei speichern
+    fs.writeFileSync("total-loans.txt", totalLoansRequested.toString());
+
+    console.log(`💾 Gesamtanzahl aller Kreditanfragen gespeichert: ${totalLoansRequested}`);
+
     // Durchschnittlichen Kreditbetrag berechnen
     const averageLoanAmount = loanAmounts.length > 0 
     ? (totalLoanAmount / loanAmounts.length).toFixed(4) 
