@@ -133,6 +133,10 @@ async function main() {
     const lastBorrower = borrowerAddresses.length > 0 ? borrowerAddresses[borrowerAddresses.length - 1] : "Keine Anfragen bisher";
 
     console.log(`🔚 Letzter Kreditnehmer: ${lastBorrower}`);
+    // Gesamtanzahl aller Kreditanfragen berechnen
+    const totalLoansRequested = Object.values(borrowerStats).reduce((sum, count) => sum + count, 0);
+
+    console.log(`📈 Gesamtzahl aller Kreditanfragen: ${totalLoansRequested}`);
 
 
     console.log(`🎖️ Erster Kreditnehmer: ${firstBorrower}`);
