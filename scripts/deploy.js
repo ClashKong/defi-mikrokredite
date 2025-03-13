@@ -213,6 +213,10 @@ async function main() {
     fs.writeFileSync("unique-borrowers.txt", uniqueBorrowers.toString());
 
     console.log(`💾 Anzahl einzigartiger Kreditnehmer gespeichert: ${uniqueBorrowers}`);
+    // Speichert die letzte Kreditanfrage-ID in einer Datei
+    fs.writeFileSync("latest-loan-id.txt", latestLoanId.toString());
+
+    console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
 
     // Überprüfen, ob die Datei existiert, und vorherige Deployments zählen
     let deploymentCount = 0;
