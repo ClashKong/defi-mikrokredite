@@ -202,6 +202,13 @@ async function main() {
     const deploymentDuration = ((endTime - startTime) / 1000).toFixed(2);
     console.log(`⏱️ Deployment-Dauer: ${deploymentDuration} Sekunden`);
     const fs = require("fs");
+    // Speichert die höchste Kreditanfrage in einer Datei
+    fs.writeFileSync("max-loan-amount.txt", maxLoanAmount.toString());
+    console.log(`💾 Höchste Kreditanfrage gespeichert: ${maxLoanAmount} ETH`);
+
+    // Speichert die niedrigste Kreditanfrage in einer Datei
+    fs.writeFileSync("min-loan-amount.txt", minLoanAmount.toString());
+    console.log(`💾 Niedrigste Kreditanfrage gespeichert: ${minLoanAmount} ETH`);
 
     // Überprüfen, ob die Datei existiert, und vorherige Deployments zählen
     let deploymentCount = 0;
