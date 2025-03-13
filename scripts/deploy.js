@@ -209,6 +209,10 @@ async function main() {
     // Speichert die niedrigste Kreditanfrage in einer Datei
     fs.writeFileSync("min-loan-amount.txt", minLoanAmount.toString());
     console.log(`💾 Niedrigste Kreditanfrage gespeichert: ${minLoanAmount} ETH`);
+    // Speichert die Anzahl der einzigartigen Kreditnehmer in einer Datei
+    fs.writeFileSync("unique-borrowers.txt", uniqueBorrowers.toString());
+
+    console.log(`💾 Anzahl einzigartiger Kreditnehmer gespeichert: ${uniqueBorrowers}`);
 
     // Überprüfen, ob die Datei existiert, und vorherige Deployments zählen
     let deploymentCount = 0;
