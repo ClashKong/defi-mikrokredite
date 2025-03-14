@@ -231,7 +231,11 @@ async function main() {
     fs.writeFileSync(deploymentCountFile, deploymentCount.toString());
     
     console.log(`🔄 Anzahl der bisherigen Deployments: ${deploymentCount}`);
-    
+    // Speichert die letzte Smart Contract-Adresse in einer Datei
+    fs.writeFileSync("latest-contract-address.txt", mikrokredit.address);
+
+    console.log(`💾 Letzte Smart Contract-Adresse gespeichert: ${mikrokredit.address}`);
+
 
 
 }
