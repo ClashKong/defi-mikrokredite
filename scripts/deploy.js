@@ -186,6 +186,14 @@ async function main() {
     const repaymentCountFile = "total-repayment-count.txt";
     let totalRepaymentCount = 0;
     
+    const latestRepaymentFile = "latest-repayment.txt";
+    const latestRepaymentAmount = hre.ethers.formatEther("1.05"); // Beispielwert für eine Rückzahlung
+
+    // Speichert die letzte Rückzahlungssumme in einer Datei
+    fs.writeFileSync(latestRepaymentFile, latestRepaymentAmount.toString());
+
+    console.log(`💾 Letzte Rückzahlungssumme gespeichert: ${latestRepaymentAmount} ETH`);
+
     // Prüfen, ob die Datei existiert und bisherige Werte laden
     if (fs.existsSync(repaymentCountFile)) {
         totalRepaymentCount = parseInt(fs.readFileSync(repaymentCountFile, "utf8")) || 0;
