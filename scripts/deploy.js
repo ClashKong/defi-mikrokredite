@@ -183,8 +183,23 @@ async function main() {
     await rueckzahlung.wait();
     console.log("✅ Kredit erfolgreich zurückgezahlt!");
     const fs = require("fs");
-
-// Speichert die Adresse in einer Datei für das Frontend
+    const repaymentCountFile = "total-repayment-count.txt";
+    let totalRepaymentCount = 0;
+    
+    // Prüfen, ob die Datei existiert und bisherige Werte laden
+    if (fs.existsSync(repaymentCountFile)) {
+        totalRepaymentCount = parseInt(fs.readFileSync(repaymentCountFile, "utf8")) || 0;
+    }
+    
+    // Erhöhe den Zähler für die neue Rückzahlung
+    totalRepaymentCount++;
+    
+    // Speichert die gesamte Anzahl an Rückzahlungen in einer Datei
+    fs.writeFileSync(repaymentCountFile, totalRepaymentCount.toString());
+    
+    console.log(`💾 Anzahl der Rückzahlungen gespeichert: ${totalRepaymentCount}`);
+    
+    // Speichert die Adresse in einer Datei für das Frontend
     fs.writeFileSync("contract-address.txt", mikrokredit.address);
 
     console.log("💾 Smart Contract-Adresse wurde in 'contract-address.txt' gespeichert!");
