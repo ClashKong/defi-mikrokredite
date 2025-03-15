@@ -283,7 +283,16 @@ async function main() {
     fs.writeFileSync("latest-loan-id.txt", latestLoanId.toString());
 
     console.log(`💾 Letzte Kreditanfrage-ID gespeichert: ${latestLoanId}`);
+    const averageRepaymentFile = "average-repayment.txt";
 
+    // Durchschnittlichen Rückzahlungsbetrag berechnen
+    const averageRepayment = totalRepayments > 0 ? (totalRepayments / totalRepaymentCount).toFixed(4) : 0;
+    
+    // Speichert den durchschnittlichen Rückzahlungsbetrag in einer Datei
+    fs.writeFileSync(averageRepaymentFile, `${averageRepayment} ETH`);
+    
+    console.log(`📊 Durchschnittliche Rückzahlung gespeichert: ${averageRepayment} ETH`);
+    
     // Überprüfen, ob die Datei existiert, und vorherige Deployments zählen
     let deploymentCount = 0;
     const deploymentCountFile = "deployment-count.txt";
