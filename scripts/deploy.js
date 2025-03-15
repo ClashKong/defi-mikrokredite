@@ -84,6 +84,28 @@ totalRevenue += repaymentAmount;
 fs.writeFileSync(revenueFile, totalRevenue.toString());
 
 console.log(`💰 Gesamte Einnahmen aus Rückzahlungen gespeichert: ${totalRevenue} ETH`);
+const maxRevenueFile = "max-revenue.txt";
+const minRevenueFile = "min-revenue.txt";
+let maxRevenue = 0;
+let minRevenue = Number.MAX_VALUE;
+
+// Prüfen, ob die Dateien existieren und bisherige Werte laden
+if (fs.existsSync(maxRevenueFile)) {
+    maxRevenue = parseFloat(fs.readFileSync(maxRevenueFile, "utf8")) || 0;
+}
+if (fs.existsSync(minRevenueFile)) {
+    minRevenue = parseFloat(fs.readFileSync(minRevenueFile, "utf8")) || Number.MAX_VALUE;
+}
+
+// Neuen Rückzahlungsbetrag prüfen und speichern
+if (repaymentAmount > maxRevenue) {
+    fs.writeFileSync(maxRevenueFile, repaymentAmount.toString());
+    console.log(`💾 Höchste Rückzahlung gespeichert: ${repaymentAmount} ETH`);
+}
+if (repaymentAmount < minRevenue) {
+    fs.writeFileSync(minRevenueFile, repaymentAmount.toString());
+    console.log(`💾 Niedrigste Rückzahlung gespeichert: ${repaymentAmount} ETH`);
+}
 
 function logDeploymentDetails(deployer, network, blockNumber, contractBalance, gasPrice, txReceipt) {
     console.log(`📦 Blocknummer: ${blockNumber}`);
