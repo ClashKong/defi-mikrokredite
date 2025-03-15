@@ -193,12 +193,22 @@ async function main() {
     fs.writeFileSync(latestRepaymentFile, latestRepaymentAmount.toString());
 
     console.log(`💾 Letzte Rückzahlungssumme gespeichert: ${latestRepaymentAmount} ETH`);
-    
+
     const maxRepaymentFile = "max-repayment.txt";
     const minRepaymentFile = "min-repayment.txt";
     let maxRepayment = 0;
     let minRepayment = Number.MAX_VALUE;
-    
+    const loanRepaymentStatsFile = "loan-repayment-stats.txt";
+
+    // Prüfen, ob die Dateien existieren und Werte laden
+    const totalLoans = fs.existsSync("total-loans.txt") ? parseInt(fs.readFileSync("total-loans.txt", "utf8")) || 0 : 0;
+    const totalRepayments = fs.existsSync("total-repayment-count.txt") ? parseInt(fs.readFileSync("total-repayment-count.txt", "utf8")) || 0 : 0;
+
+    // Speichert die Gesamtanzahl der Kredite und Rückzahlungen in einer Datei
+    fs.writeFileSync(loanRepaymentStatsFile, `Kreditanfragen: ${totalLoans}\nRückzahlungen: ${totalRepayments}`);
+
+    console.log(`💾 Kreditanfragen und Rückzahlungen gespeichert: Kredite: ${totalLoans}, Rückzahlungen: ${totalRepayments}`);
+
     // Prüfen, ob die Dateien existieren und bisherige Werte laden
     if (fs.existsSync(maxRepaymentFile)) {
         maxRepayment = parseFloat(fs.readFileSync(maxRepaymentFile, "utf8")) || 0;
