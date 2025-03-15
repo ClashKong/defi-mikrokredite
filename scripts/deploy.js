@@ -193,7 +193,31 @@ async function main() {
     fs.writeFileSync(latestRepaymentFile, latestRepaymentAmount.toString());
 
     console.log(`💾 Letzte Rückzahlungssumme gespeichert: ${latestRepaymentAmount} ETH`);
-
+    
+    const maxRepaymentFile = "max-repayment.txt";
+    const minRepaymentFile = "min-repayment.txt";
+    let maxRepayment = 0;
+    let minRepayment = Number.MAX_VALUE;
+    
+    // Prüfen, ob die Dateien existieren und bisherige Werte laden
+    if (fs.existsSync(maxRepaymentFile)) {
+        maxRepayment = parseFloat(fs.readFileSync(maxRepaymentFile, "utf8")) || 0;
+    }
+    if (fs.existsSync(minRepaymentFile)) {
+        minRepayment = parseFloat(fs.readFileSync(minRepaymentFile, "utf8")) || Number.MAX_VALUE;
+    }
+    
+    // Neuen Rückzahlungsbetrag prüfen und speichern
+    const repaymentAmount = parseFloat(latestRepaymentAmount);
+    if (repaymentAmount > maxRepayment) {
+        fs.writeFileSync(maxRepaymentFile, repaymentAmount.toString());
+        console.log(`💾 Höchste Rückzahlung gespeichert: ${repaymentAmount} ETH`);
+    }
+    if (repaymentAmount < minRepayment) {
+        fs.writeFileSync(minRepaymentFile, repaymentAmount.toString());
+        console.log(`💾 Niedrigste Rückzahlung gespeichert: ${repaymentAmount} ETH`);
+    }
+    
     // Prüfen, ob die Datei existiert und bisherige Werte laden
     if (fs.existsSync(repaymentCountFile)) {
         totalRepaymentCount = parseInt(fs.readFileSync(repaymentCountFile, "utf8")) || 0;
