@@ -208,7 +208,16 @@ async function main() {
     fs.writeFileSync(loanRepaymentStatsFile, `Kreditanfragen: ${totalLoans}\nRückzahlungen: ${totalRepayments}`);
 
     console.log(`💾 Kreditanfragen und Rückzahlungen gespeichert: Kredite: ${totalLoans}, Rückzahlungen: ${totalRepayments}`);
+    const repaymentRatioFile = "repayment-ratio.txt";
 
+    // Verhältnis von Rückzahlungen zu Kreditanfragen berechnen
+    const repaymentRatio = totalLoans > 0 ? ((totalRepayments / totalLoans) * 100).toFixed(2) : 0;
+    
+    // Speichert das Verhältnis in einer Datei
+    fs.writeFileSync(repaymentRatioFile, `${repaymentRatio}%`);
+    
+    console.log(`📊 Rückzahlungsquote gespeichert: ${repaymentRatio}%`);
+    
     // Prüfen, ob die Dateien existieren und bisherige Werte laden
     if (fs.existsSync(maxRepaymentFile)) {
         maxRepayment = parseFloat(fs.readFileSync(maxRepaymentFile, "utf8")) || 0;
