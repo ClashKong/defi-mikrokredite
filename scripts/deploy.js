@@ -68,6 +68,22 @@ async function handleRepayment(mikrokredit) {
     saveToFile("latest-repayment.txt", "1.05 ETH");
     updateRepaymentStats();
 }
+const revenueFile = "total-revenue.txt";
+let totalRevenue = 0;
+
+// Prüfen, ob die Datei existiert und bisherige Werte laden
+if (fs.existsSync(revenueFile)) {
+    totalRevenue = parseFloat(fs.readFileSync(revenueFile, "utf8")) || 0;
+}
+
+// Neuen Rückzahlungsbetrag hinzufügen
+const repaymentAmount = parseFloat("1.05"); // Beispiel für eine Rückzahlung
+totalRevenue += repaymentAmount;
+
+// Speichert die gesamte Einnahmensumme in einer Datei
+fs.writeFileSync(revenueFile, totalRevenue.toString());
+
+console.log(`💰 Gesamte Einnahmen aus Rückzahlungen gespeichert: ${totalRevenue} ETH`);
 
 function logDeploymentDetails(deployer, network, blockNumber, contractBalance, gasPrice, txReceipt) {
     console.log(`📦 Blocknummer: ${blockNumber}`);
