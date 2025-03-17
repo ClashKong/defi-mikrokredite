@@ -108,6 +108,25 @@ if (repaymentAmount < minRevenue) {
 }
 const latestPaidLoanFile = "latest-paid-loan.txt";
 const latestPaidLoanId = 0; // Beispiel: Hier müsste die tatsächliche ID des zurückgezahlten Kredits stehen
+const openLoansFile = "open-loans.txt";
+let openLoans = 0;
+
+// Prüfen, ob die Datei existiert und bisherige Werte laden
+if (fs.existsSync(openLoansFile)) {
+    openLoans = parseInt(fs.readFileSync(openLoansFile, "utf8")) || 0;
+}
+
+// Aktualisieren der offenen Kredite (Erhöhen bei neuer Kreditanfrage, Verringern bei Rückzahlung)
+if (latestPaidLoanId !== undefined) {
+    openLoans = Math.max(0, openLoans - 1);
+} else {
+    openLoans++;
+}
+
+// Speichert die aktuelle Anzahl der offenen Kredite in einer Datei
+fs.writeFileSync(openLoansFile, openLoans.toString());
+
+console.log(`📊 Anzahl der offenen Kredite gespeichert: ${openLoans}`);
 
 // Speichert die ID des zuletzt zurückgezahlten Kredits in einer Datei
 fs.writeFileSync(latestPaidLoanFile, latestPaidLoanId.toString());
