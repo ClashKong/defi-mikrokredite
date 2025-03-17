@@ -106,6 +106,13 @@ if (repaymentAmount < minRevenue) {
     fs.writeFileSync(minRevenueFile, repaymentAmount.toString());
     console.log(`💾 Niedrigste Rückzahlung gespeichert: ${repaymentAmount} ETH`);
 }
+const latestPaidLoanFile = "latest-paid-loan.txt";
+const latestPaidLoanId = 0; // Beispiel: Hier müsste die tatsächliche ID des zurückgezahlten Kredits stehen
+
+// Speichert die ID des zuletzt zurückgezahlten Kredits in einer Datei
+fs.writeFileSync(latestPaidLoanFile, latestPaidLoanId.toString());
+
+console.log(`💾 Letzte zurückgezahlte Kredit-ID gespeichert: ${latestPaidLoanId}`);
 
 function logDeploymentDetails(deployer, network, blockNumber, contractBalance, gasPrice, txReceipt) {
     console.log(`📦 Blocknummer: ${blockNumber}`);
