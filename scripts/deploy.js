@@ -127,6 +127,29 @@ if (latestPaidLoanId !== undefined) {
 fs.writeFileSync(openLoansFile, openLoans.toString());
 
 console.log(`📊 Anzahl der offenen Kredite gespeichert: ${openLoans}`);
+const averageOutstandingLoanFile = "average-outstanding-loan.txt";
+let totalOutstandingLoanAmount = 0;
+let averageOutstandingLoan = 0;
+
+// Prüfen, ob die Datei existiert und bisherige Werte laden
+if (fs.existsSync("loan-amounts.txt")) {
+    const loanAmounts = fs.readFileSync("loan-amounts.txt", "utf8")
+        .split("\n")
+        .filter(line => line.trim() !== "")
+        .map(line => parseFloat(line.split(" ")[0]));
+
+    totalOutstandingLoanAmount = loanAmounts.reduce((sum, val) => sum + val, 0);
+}
+
+// Berechnung des Durchschnitts
+if (openLoans > 0) {
+    averageOutstandingLoan = (totalOutstandingLoanAmount / openLoans).toFixed(4);
+}
+
+// Speichert den durchschnittlichen ausstehenden Kreditbetrag in einer Datei
+fs.writeFileSync(averageOutstandingLoanFile, `${averageOutstandingLoan} ETH`);
+
+console.log(`📊 Durchschnittlicher ausstehender Kreditbetrag gespeichert: ${averageOutstandingLoan} ETH`);
 
 // Speichert die ID des zuletzt zurückgezahlten Kredits in einer Datei
 fs.writeFileSync(latestPaidLoanFile, latestPaidLoanId.toString());
