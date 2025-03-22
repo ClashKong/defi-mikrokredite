@@ -150,6 +150,20 @@ if (openLoans > 0) {
 fs.writeFileSync(averageOutstandingLoanFile, `${averageOutstandingLoan} ETH`);
 
 console.log(`📊 Durchschnittlicher ausstehender Kreditbetrag gespeichert: ${averageOutstandingLoan} ETH`);
+const lastDeploymentLogFile = "last-deployment-log.txt";
+
+const deploymentLog = [
+  `🗓️ Zeit: ${new Date().toISOString()}`,
+  `📦 Adresse: ${mikrokredit.address}`,
+  `🔗 Netzwerk: ${network.name} (Chain ID: ${network.chainId})`,
+  `📄 Blocknummer: ${blockNumber}`,
+  `----------------------------------\n`
+].join("\n");
+
+// Speichert die Infos in der Log-Datei (anhängen)
+fs.appendFileSync(lastDeploymentLogFile, deploymentLog);
+
+console.log("📝 Letztes Deployment wurde im Log gespeichert.");
 
 // Speichert die ID des zuletzt zurückgezahlten Kredits in einer Datei
 fs.writeFileSync(latestPaidLoanFile, latestPaidLoanId.toString());
