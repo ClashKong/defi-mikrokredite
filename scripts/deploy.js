@@ -164,6 +164,33 @@ const deploymentLog = [
 fs.appendFileSync(lastDeploymentLogFile, deploymentLog);
 
 console.log("📝 Letztes Deployment wurde im Log gespeichert.");
+const deploymentTimeFile = "average-deployment-time.txt";
+let deploymentTimes = [];
+
+// Vorherige Zeiten laden, falls vorhanden
+if (fs.existsSync(deploymentTimeFile)) {
+    deploymentTimes = fs
+        .readFileSync(deploymentTimeFile, "utf8")
+        .split("\n")
+        .filter(Boolean)
+        .map(line => parseFloat(line));
+}
+
+// Neue Zeit hinzufügen
+deploymentTimes.push(parseFloat(deploymentDuration));
+
+// Durchschnitt berechnen
+const avgDeploymentTime = (
+    deploymentTimes.reduce((sum, val) => sum + val, 0) / deploymentTimes.length
+).toFixed(2);
+
+// Datei überschreiben: neue Liste & Durchschnitt speichern
+fs.writeFileSync(
+    deploymentTimeFile,
+    deploymentTimes.join("\n") + `\n\nDurchschnitt: ${avgDeploymentTime} Sekunden`
+);
+
+console.log(`📈 Durchschnittliche Deployment-Dauer: ${avgDeploymentTime} Sekunden gespeichert.`);
 
 // Speichert die ID des zuletzt zurückgezahlten Kredits in einer Datei
 fs.writeFileSync(latestPaidLoanFile, latestPaidLoanId.toString());
