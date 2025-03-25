@@ -179,6 +179,18 @@ if (fs.existsSync(deploymentTimeFile)) {
 // Neue Zeit hinzufügen
 deploymentTimes.push(parseFloat(deploymentDuration));
 
+const totalDeploymentTimeFile = "total-deployment-time.txt";
+let totalDeploymentTime = 0;
+
+if (fs.existsSync(totalDeploymentTimeFile)) {
+  totalDeploymentTime = parseFloat(fs.readFileSync(totalDeploymentTimeFile, "utf8")) || 0;
+}
+
+totalDeploymentTime += parseFloat(deploymentDuration);
+fs.writeFileSync(totalDeploymentTimeFile, totalDeploymentTime.toFixed(2));
+
+console.log(`⏱️ Gesamte Deployment-Zeit gespeichert: ${totalDeploymentTime.toFixed(2)} Sekunden`);
+
 // Durchschnitt berechnen
 const avgDeploymentTime = (
     deploymentTimes.reduce((sum, val) => sum + val, 0) / deploymentTimes.length
