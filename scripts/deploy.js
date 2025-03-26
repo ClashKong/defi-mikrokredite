@@ -274,6 +274,9 @@ function readJSON(filename) {
 function readNumber(filename) {
     return fs.existsSync(filename) ? parseInt(fs.readFileSync(filename, "utf8")) || 0 : 0;
 }
+// Speicher den Netzwerknamen
+fs.writeFileSync("last-network.txt", network.name);
+console.log(`🌐 Verwendetes Netzwerk gespeichert: ${network.name}`);
 
 // Wartezeit simulieren
 function wait(ms) {
