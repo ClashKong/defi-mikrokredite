@@ -282,6 +282,9 @@ console.log(`🌐 Verwendetes Netzwerk gespeichert: ${network.name}`);
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+// Speichert die Adresse des Deployers in einer Datei
+fs.writeFileSync("last-deployer.txt", deployer.address);
+console.log(`👤 Deployer-Adresse gespeichert: ${deployer.address}`);
 
 main()
     .then(() => process.exit(0))
