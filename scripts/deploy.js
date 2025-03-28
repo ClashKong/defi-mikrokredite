@@ -285,6 +285,10 @@ function wait(ms) {
 // Speichert die Adresse des Deployers in einer Datei
 fs.writeFileSync("last-deployer.txt", deployer.address);
 console.log(`👤 Deployer-Adresse gespeichert: ${deployer.address}`);
+const contractName = "Mikrokredit"; // Falls du den Namen dynamisch setzen willst, kann das auch parametrierbar sein
+
+fs.writeFileSync("contract-name.txt", contractName);
+console.log(`📘 Vertragsname gespeichert: ${contractName}`);
 
 main()
     .then(() => process.exit(0))
