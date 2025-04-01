@@ -289,6 +289,20 @@ const contractName = "Mikrokredit"; // Falls du den Namen dynamisch setzen wills
 
 fs.writeFileSync("contract-name.txt", contractName);
 console.log(`📘 Vertragsname gespeichert: ${contractName}`);
+const envInfoFile = "env-info.txt";
+const nodeVersion = process.version;
+const hardhatVersion = require("hardhat/package.json").version;
+
+const envInfo = [
+  `🛠️ Node.js Version: ${nodeVersion}`,
+  `⚙️ Hardhat Version: ${hardhatVersion}`,
+  `📅 Zeitpunkt: ${new Date().toISOString()}`,
+  `-----------------------------\n`
+].join("\n");
+
+fs.appendFileSync(envInfoFile, envInfo);
+
+console.log("🧾 Umgebungsinformationen gespeichert.");
 
 main()
     .then(() => process.exit(0))
